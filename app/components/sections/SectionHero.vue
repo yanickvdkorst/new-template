@@ -12,21 +12,30 @@ defineProps<{
 
 <template>
   <section
-    class="hero relative h-screen flex flex-col justify-center items-center text-center text-white bg-cover bg-center"
-    :style="{ backgroundImage: `url(${hero.images?.[0]?.src || '/default-hero.jpg'})` }"  >
-    <div class="bg-black/50 w-full h-full absolute top-0 left-0"></div>
-    <div class="relative max-w-4xl px-6 z-10">
-      <h2 class="text-lg md:text-xl font-medium mb-2">{{ hero.subtitle }}</h2>
+    class="relative h-screen flex flex-col justify-center items-center text-center text-neutral-50 bg-cover bg-center"
+    :style="{ backgroundImage: `url(${hero.images?.[0]?.src || '/default-hero.jpg'})` }"
+  >
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-3xl px-md">
+      <h2 class="text-lg md:text-xl font-medium mb-2 text-secondary">{{ hero.subtitle }}</h2>
       <h1 class="text-4xl md:text-6xl font-bold mb-4">{{ hero.title }}</h1>
-      <p class="text-base md:text-lg mb-6">{{ hero.description }}</p>
-      <div class="flex justify-center gap-4">
+      <p class="text-base md:text-lg mb-6 opacity-90">{{ hero.description }}</p>
+
+      <div class="flex justify-center gap-4 flex-wrap">
         <a
           v-for="link in hero.links"
           :key="link.to"
           :href="link.to"
           :class="[
-            'px-6 py-3 rounded-md font-semibold',
-            link.color === 'primary' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-900'
+            'btn',
+            link.color === 'primary'
+              ? 'btn-primary'
+              : link.color === 'secondary'
+              ? 'btn-secondary'
+              : 'bg-neutral-200 text-neutral-900'
           ]"
         >
           {{ link.label }}
@@ -37,14 +46,9 @@ defineProps<{
 </template>
 
 <style scoped>
-.hero {
+section {
   position: relative;
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  z-index: 0;
+  background-size: cover;
+  background-position: center;
 }
 </style>
