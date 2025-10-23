@@ -1,23 +1,11 @@
 <script setup lang="ts">
-import SectionHero from '@/components/sections/SectionHero.vue'
+import { home } from '~/data/homeData'
 
-const { data: home } = await useAsyncData(() =>
-  queryCollection('content').path('/').first()
-)
-
-import { onMounted } from 'vue'
-
-
-
-useSeoMeta({
-  title: home.value?.seo?.title,
-  description: home.value?.seo?.description
-})
 </script>
 
 <template>
   <div v-if="home">
-    <SectionHero :hero="home.body.hero" />
+    <SectionHero :hero="home.hero" />
   </div>
   <div v-else>Loading...</div>
 </template>

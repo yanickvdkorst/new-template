@@ -2,6 +2,8 @@ import { fileURLToPath } from 'url'
 import { dirname, resolve } from 'path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+import tailwindcss from "@tailwindcss/vite";
+
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -17,11 +19,19 @@ export default defineNuxtConfig({
     { path: '@/components/sections', prefix: 'Section' },
   ],
 
+  css: ['@/assets/css/main.css'],
+
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
+
   imports: {
     dirs: ['composables', 'store'],
   },
 
   modules: ['@pinia/nuxt', '@nuxt/content'],
 
-  css: ['@/assets/styles/main.scss'],
+  
 })
