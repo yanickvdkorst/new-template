@@ -6,6 +6,7 @@ import { home } from '~/data/homeData'
 <template>
   <div v-if="home">
     <SectionHero :hero="home.hero" />
+    <SectionCta :CTA="home.CTA" />
   </div>
   <div v-else>Loading...</div>
 </template>
